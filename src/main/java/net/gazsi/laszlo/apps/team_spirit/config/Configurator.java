@@ -9,8 +9,11 @@ import java.util.Map;
 public class Configurator {
 
     public static final String CONFIGURATION_FILE_NAME = "config";
+
     public static final String CONFIGURATION_USERNAME_KEY = "username";
+
     public static final String CONFIGURATION_PASSWORD_KEY = "password";
+
     public static final String CONFIGURATION_BLACKLIST_KEY = "blacklist";
 
     Configuration configuration;

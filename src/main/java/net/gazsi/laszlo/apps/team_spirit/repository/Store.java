@@ -1,6 +1,5 @@
-package net.gazsi.laszlo.apps.team_spirit.core;
+package net.gazsi.laszlo.apps.team_spirit.repository;
 
-import net.gazsi.laszlo.apps.team_spirit.config.Configuration;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.User;
 import org.eclipse.egit.github.core.client.GitHubClient;
@@ -11,21 +10,14 @@ import org.eclipse.egit.github.core.service.RepositoryService;
 import java.io.IOException;
 import java.util.List;
 
-public class Controller {
-
+public class Store {
     List<Repository> repositories;
-    Configuration configuration;
 
-    public Controller(Configuration configuration) {
-        this.configuration = configuration;
-    }
-
-    public void loadRepositories() throws IOException {
-        GitHubClient client = createClient();
+    public void loadRepositories(GitHubClient client) throws IOException {
 
         // public repositories
         RepositoryService repositoryService = new RepositoryService(client);
-        List<Repository> repositories = repositoryService.getRepositories();
+        repositories = repositoryService.getRepositories();
         CommitService commitService = new CommitService();
 
         // organization repositories
@@ -37,13 +29,7 @@ public class Controller {
         }
     }
 
-    private GitHubClient createClient()
-    {
-        GitHubClient client = new GitHubClient();
-        client.setCredentials(configuration.getGitUserName(), configuration.getGitPassword());
-
-        return client;
+    public List<Repository> getRepositories() {
+        return repositories;
     }
-
-
 }
